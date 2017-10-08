@@ -10,15 +10,17 @@ To get you started you can simply clone the repository and install the dependenc
 ### Prerequisites
 
 It use a number of Node.js tools to initialize. You must have Node.js
-and its package manager (npm) installed. You can get them from [here][node].
+and its package manager (npm) installed..
+
+The Ticket-viewer backend (https://github.com/sallyTing/ticket-viewer) must be started.(running on localhost:9000)
 
 ### Install Dependencies
 
 We have two kinds of dependencies in this project: tools and Angular framework code. The tools help
 us manage and test the application.
 
-* We get the tools we depend upon via `npm`, the [Node package manager][npm].
-* We get the Angular code via `bower`, a [client-side code package manager][bower].
+* We get the tools we depend upon via `npm`.
+* We get the Angular code via `bower`.
 
 We have preconfigured `npm` to automatically run `bower` so we can simply do:
 
@@ -41,5 +43,5 @@ this server is:
 npm start
 ```
 
-Now browse to the app at [`localhost:8000/index.html`][local-app-url].
+Now browse to the app at [`localhost:8000/index.html`].
 
