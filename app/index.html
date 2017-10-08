@@ -25,35 +25,50 @@
 
   <div ng-app="zendeskTicketsViewer" ng-controller="ticketCtrl">
       <h3>Welcome to Ticket Viewer</h3>
-      
-      <p>Click <a href="#" ng-click="fetchTickets('?page=1')">here</a> to view all the tickets.</p>
     
+      <p>Click <a href="#" ng-click="fetchTickets('?page=1')">here</a> to view all the tickets.</p>
+  
       <p>{{errorMsg}}</p>
 
-      <p ng-if="count">{{count}} tickets in total</p>
-      <a href="#" ng-if="previous != ''" ng-click="previousPage();">Previous</a>
-      <a href="#" ng-if="next != ''" ng-click="nextPage();">Next</a>
-      <table ng-if="tickets.length > 0">
-          <thead>
-          <tr>
-              <th>ID</th><th>Type</th><th>subject</th><th>Description</th><th>Priority</th><th>status</th><th>Tags</th><th>Create Date</th><th>Update Date</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr ng-repeat="ticket in tickets">
-              <td>{{ticket.id}}</td>
-              <td>{{ticket.ticketType}}</td>
-              <td>{{ticket.subject}}</td>
-              <td>{{ticket.description}}</td>
-              <td>{{ticket.priority}}</td>
-              <td>{{ticket.status}}</td>
-              <td><span ng-repeat="tag in ticket.tags">{{tag}}, </span></td>
-              <td>{{ticket.created_at | date:'medium'}}</td>
-              <td>{{ticket.updated_at | date:'medium'}}</td>
-          </tr>
-          </tbody>
-      </table>
-  </div>
+      <div ng-if="singleView">
+          <h4>Ticket #{{ticket.id}}</h4>
+          <p><strong>ID: </strong>{{ticket.id}}</p>
+          <p ng-if="ticket.ticketType"><strong>Type: </strong>{{ticket.ticketType}}</p>
+          <p ng-if="ticket.subject"><strong>Subject: </strong>{{ticket.subject}}</p>
+          <p ng-if="ticket.description"><strong>Description: </strong>{{ticket.description}}</p>
+          <p ng-if="ticket.priority"><strong>Priority: </strong>{{ticket.priority}}</p>
+          <p ng-if="ticket.status"><strong>Status: </strong>{{ticket.status}}</p>
+          <p ng-if="ticket.tags"><strong>Tags: </strong><span ng-repeat="tag in ticket.tags">{{tag}}, </span></p>
+          <p ng-if="ticket.created_at"><strong>Create: </strong>{{ticket.created_at | date:'medium'}}</p>
+          <p ng-if="ticket.updated_at"><strong>Update: </strong>{{ticket.updated_at | date:'medium'}}</p>
+      </div>
+
+      <div ng-if="!singleView">
+          <p ng-if="count">{{count}} tickets in total</p>
+          <a href="#" ng-if="previous != ''" ng-click="previousPage();">Previous</a>
+          <a href="#" ng-if="next != ''" ng-click="nextPage();">Next</a>
+          <table ng-if="tickets.length > 0">
+              <thead>
+              <tr>
+                  <th>ID</th><th>Type</th><th>subject</th><th>Description</th><th>Priority</th><th>status</th><th>Tags</th><th>Create Date</th><th>Update Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="ticket in tickets">
+                  <td ng-click="selectSingleTicket(ticket.id);">{{ticket.id}}</td>
+                  <td>{{ticket.ticketType}}</td>
+                  <td>{{ticket.subject}}</td>
+                  <td>{{ticket.description}}</td>
+                  <td>{{ticket.priority}}</td>
+                  <td>{{ticket.status}}</td>
+                  <td><span ng-repeat="tag in ticket.tags">{{tag}}, </span></td>
+                  <td>{{ticket.created_at | date:'medium'}}</td>
+                  <td>{{ticket.updated_at | date:'medium'}}</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+</div>  
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>

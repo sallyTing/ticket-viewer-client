@@ -24,8 +24,13 @@
   padding-right: 0.3em;
 }
 
+body > div {
+  margin: 30px;
+}
+
 table {
   border-collapse: collapse;
+  margin: 30px;
 }
 
 table, th, td {
